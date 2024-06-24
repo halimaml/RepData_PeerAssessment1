@@ -5,16 +5,14 @@ output:
     keep_md: true
 ---
 
-
 ## Loading and preprocessing the data
+
 ```{r, echo = TRUE}
 data <- read.csv("activity.csv", header = TRUE, sep = ",")
 clean_data <- na.omit(data)
 ```
 
-
 ## What is mean total number of steps taken per day?
-
 
 ```{r, echo = TRUE}
 #aggregate the data
@@ -54,6 +52,7 @@ max_interval <- average_steps_per_interval %>%
   filter(steps == max(steps))
 max_interval
 ```
+
 The interval with the maximum average steps is `r max_interval`
 
 ## Imputing missing values
@@ -76,6 +75,7 @@ data$steps <- ifelse(is.na(data$steps), data$mean_steps, data$steps)
 # Clean up by removing the mean_steps column
 data <- data[, !(names(data) %in% "mean_steps")]
 ```
+
 ```{r, echo=TRUE}
 ##create the histogram of the total number of steps taken each day using data with no Na
 ##aggregate the data
@@ -97,14 +97,14 @@ mean_steps1 <- mean(total_steps_per_day1$steps)
 median_steps1 <- median(total_steps_per_day1$steps)
 
 ```
+
 The mean of the total number of steps taken per day when the Nas are taken into consideration is `r mean_steps1`
 
 The median of the total number of steps taken per day when the Nas are taken into consideration is `r median_steps1`
 
-the values of the mean and median does not differ between the two data sets. Imputing missing data did not affect the estimation of the total daily number of steps
+The values of the mean and median does not differ between the two data sets. Imputing missing data did not affect the estimation of the total daily number of steps
 
 ## Are there differences in activity patterns between weekdays and weekends?
-
 
 ```{r, echo=TRUE}
 #convert the date column to date format
@@ -118,7 +118,6 @@ head(data)
 
 
 ```
-
 
 ```{r, echo=TRUE}
 ##create the plot 
@@ -147,7 +146,4 @@ mtext("5-minute Interval", side = 1, line = 2, outer = TRUE)
 
 ```
 
-The person is more active in weekdays compared to weekends 
-
-
-
+The person is more active in weekdays compared to weekends days 
